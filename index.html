@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saggio Pizza — Food Truck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:   #FAF7F2;
+      --beige:   #F0EAE0;
+      --tan:     #D6C9B6;
+      --brown:   #5C4A32;
+      --dark:    #2A1F14;
+      --accent:  #C8581A;
+      --white:   #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(250,247,242,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--tan);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--dark);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brown);
+      text-decoration: none;
+      transition: color 200ms;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(250,247,242,0.18) 0%,
+        rgba(42,31,20,0.45) 60%,
+        rgba(42,31,20,0.72) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      color: var(--white);
+      padding: 0 2rem;
+      max-width: 780px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 8vw, 6.4rem);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 2.8rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2.6rem;
+      border: 1px solid rgba(255,255,255,0.7);
+      color: var(--white);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 220ms, border-color 220ms, color 220ms;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--white);
+      color: var(--dark);
+      border-color: var(--white);
+    }
+
+    .btn-dark {
+      border-color: var(--brown);
+      color: var(--brown);
+    }
+
+    .btn-dark:hover {
+      background: var(--brown);
+      color: var(--white);
+    }
+
+    /* ── SECTIONS GÉNÉRIQUES ── */
+    section { padding: 7rem 2rem; }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 1.2rem;
+    }
+
+    .section-title em { font-style: italic; }
+
+    .divider {
+      width: 48px;
+      height: 1px;
+      background: var(--tan);
+      margin: 1.6rem 0 3rem;
+    }
+
+    /* ── MENU ── */
+    #menu { background: var(--white); }
+
+    .menu-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .menu-image {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 2px;
+      box-shadow: 0 20px 60px rgba(42,31,20,0.12);
+    }
+
+    .menu-text p {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--brown);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    /* ── AMBIANCE ── */
+    #ambiance { background: var(--white); }
+
+    .ambiance-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 1.2rem;
+      align-items: stretch;
+    }
+
+    .ambiance-portrait {
+      border-radius: 2px;
+      overflow: hidden;
+      aspect-ratio: 9/16;
+    }
+
+    .ambiance-portrait video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ambiance-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .ambiance-landscape {
+      border-radius: 2px;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .ambiance-landscape video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .ambiance-grid {
+        grid-template-columns: 1fr;
+      }
+      .ambiance-portrait {
+        aspect-ratio: 4/5;
+      }
+      .ambiance-landscape {
+        aspect-ratio: 16/9;
+      }
+    }
+
+    /* ── PLANNING ── */
+    #planning { background: var(--cream); }
+
+    .planning-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 0;
+    }
+
+    .day-card {
+      background: var(--white);
+      border: 1px solid var(--beige);
+      padding: 2rem 2.2rem;
+      transition: box-shadow 220ms, border-color 220ms;
+      cursor: default;
+    }
+
+    .day-card:hover {
+      box-shadow: 0 8px 32px rgba(42,31,20,0.09);
+      border-color: var(--tan);
+    }
+
+    .day-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .day-location {
+      font-size: 0.88rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--brown);
+    }
+
+    .day-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--dark); }
+
+    #contact .section-title { color: var(--cream); }
+    #contact .section-label { color: rgba(250,247,242,0.5); }
+    #contact .divider { background: rgba(250,247,242,0.2); }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-info p {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: rgba(250,247,242,0.7);
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(250,247,242,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--cream);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .contact-detail {
+      font-size: 0.88rem;
+      color: var(--cream);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .contact-detail:hover { color: rgba(250,247,242,0.6); }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(250,247,242,0.5);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background: rgba(250,247,242,0.06);
+      border: 1px solid rgba(250,247,242,0.15);
+      padding: 0.9rem 1.2rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--cream);
+      outline: none;
+      transition: border-color 200ms;
+      resize: none;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(250,247,242,0.3);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: rgba(250,247,242,0.45);
+    }
+
+    .btn-light {
+      border-color: rgba(250,247,242,0.5);
+      color: var(--cream);
+      margin-top: 0.5rem;
+      align-self: flex-start;
+    }
+
+    .btn-light:hover {
+      background: var(--cream);
+      color: var(--dark);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(250,247,242,0.08);
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-logo span { color: var(--accent); }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: rgba(250,247,242,0.35);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 5rem 1.5rem; }
+
+      .menu-layout,
+      .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+
+      .menu-image { aspect-ratio: 4/3; }
+
+      footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Saggio <span>Pizza</span></a>
+    <ul class="nav-links">
+      <li><a href="#menu">Le Menu</a></li>
+      <li><a href="#planning">Planning</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <video id="hero-video" autoplay muted loop playsinline>
+      <source src="videos/feu.mp4.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Food Truck — Médoc</p>
+      <h1 class="hero-title">L'art de la pizza<br><em>au feu de bois</em></h1>
+      <p class="hero-sub">Pâte maison, ingrédients généreux,<br>cuite à la flamme pour vous chaque jour.</p>
+      <a href="#planning" class="btn">Nous trouver</a>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu">
+    <div class="section-inner">
+      <div class="menu-layout">
+        <img
+          src="https://scontent-mad2-1.xx.fbcdn.net/v/t39.30808-6/488224124_1217157853750830_6899205692229577137_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=7b2446&_nc_ohc=KY1ukJsqS28Q7kNvwEJzjmu&_nc_oc=Adpcopkx7l4HKlJ46FcwpRXVz9KUKY-SeiONhgjdH7YhBH4pDUpLLDjW4TEn_5xXwCNKglT5cvkZcVB3qEqsk1Be&_nc_zt=23&_nc_ht=scontent-mad2-1.xx&_nc_gid=wMtHT16Gz_VV52Ok1SVjYg&_nc_ss=7a389&oh=00_Af28fIaDJasyh0dbKS8cxsy7VewfboC3wEKw9QQrGX3NAw&oe=69E7C32F"
+          alt="Carte Saggio Pizza"
+          class="menu-image"
+        />
+        <div class="menu-text">
+          <p class="section-label">Notre carte</p>
+          <h2 class="section-title">Des pizzas<br><em>généreuses & savoureuses</em></h2>
+          <div class="divider"></div>
+          <p>
+            Chez Saggio Pizza, chaque pizza est préparée à la commande avec une pâte maison,
+            des produits frais sélectionnés avec soin et cuite au feu de bois pour cette
+            croûte dorée et croustillante qui fait toute la différence.
+          </p>
+          <a href="#planning" class="btn btn-dark">Voir où on est cette semaine</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AMBIANCE -->
+  <section id="ambiance">
+    <div class="section-inner">
+      <p class="section-label">Dans les coulisses</p>
+      <h2 class="section-title">La pizza,<br><em>un savoir-faire</em></h2>
+      <div class="divider"></div>
+      <div class="ambiance-grid">
+        <div class="ambiance-portrait">
+          <video autoplay muted loop playsinline>
+            <source src="videos/pateapizza.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="ambiance-stack">
+          <div class="ambiance-landscape">
+            <video autoplay muted loop playsinline>
+              <source src="videos/pizza.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="ambiance-landscape">
+            <video autoplay muted loop playsinline>
+              <source src="videos/basilic.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANNING -->
+  <section id="planning">
+    <div class="section-inner">
+      <p class="section-label">Où nous trouver</p>
+      <h2 class="section-title">Notre planning<br><em>de la semaine</em></h2>
+      <div class="divider"></div>
+      <div class="planning-grid">
+
+        <div class="day-card">
+          <div class="day-name">Lundi</div>
+          <div class="day-location"><span class="day-dot"></span>Talais — Mairie</div>
+        </div>
+
+        <div class="day-card">
+          <div class="day-name">Mardi</div>
+          <div class="day-location"><span class="day-dot"></span>Port de Goulée</div>
+        </div>
+
+        <div class="day-card">
+          <div class="day-name">Mercredi</div>
+          <div class="day-location"><span class="day-dot"></span>Naujac — Mairie</div>
+        </div>
+
+        <div class="day-card">
+          <div class="day-name">Jeudi</div>
+          <div class="day-location"><span class="day-dot"></span>Jau-Dignac-et-Loirac — Devant Renault</div>
+        </div>
+
+        <div class="day-card">
+          <div class="day-name">Vendredi</div>
+          <div class="day-location"><span class="day-dot"></span>Queyrac — Église</div>
+        </div>
+
+        <div class="day-card">
+          <div class="day-name">Dimanche</div>
+          <div class="day-location"><span class="day-dot"></span>Lesparre — Foussac</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="contact-layout">
+        <div class="contact-info">
+          <p class="section-label">Nous contacter</p>
+          <h2 class="section-title">Une question ?<br><em>On est là.</em></h2>
+          <div class="divider"></div>
+          <p>Pour toute question sur notre planning, nos pizzas ou pour organiser un événement, n'hésitez pas à nous écrire ou nous appeler.</p>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .82h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.45-1.45a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <a href="tel:+33677576734" class="contact-detail">06 77 57 67 34</a>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <a href="mailto:Saggio.pizzaft@gmail.com" class="contact-detail">Saggio.pizzaft@gmail.com</a>
+          </div>
+        </div>
+
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="name">Votre nom</label>
+            <input type="text" id="name" name="name" placeholder="Jean Dupont" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="jean@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Votre message…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-light">Envoyer le message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Saggio <span>Pizza</span></div>
+    <p class="footer-copy">© 2026 Saggio Pizza — Food Truck Médoc</p>
+  </footer>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.textContent = 'Message envoyé';
+      btn.style.opacity = '0.6';
+      btn.style.cursor = 'default';
+      btn.disabled = true;
+      e.target.reset();
+    }
+  </script>
+
+</body>
+</html>
