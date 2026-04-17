@@ -212,27 +212,115 @@
     /* ── MENU ── */
     #menu { background: var(--white); }
 
-    .menu-layout {
+    .menu-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .menu-header .divider {
+      margin: 1.6rem auto 0;
+    }
+
+    .menu-pizzas {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
+      gap: 0;
+      border: 1px solid var(--beige);
+      margin-bottom: 3rem;
     }
 
-    .menu-image {
-      width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      border-radius: 2px;
-      box-shadow: 0 20px 60px rgba(42,31,20,0.12);
+    .pizza-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 1.1rem 1.6rem;
+      border-bottom: 1px solid var(--beige);
+      transition: background 180ms;
     }
 
-    .menu-text p {
+    .pizza-item:nth-child(odd) { border-right: 1px solid var(--beige); }
+
+    .pizza-item:nth-last-child(-n+2) { border-bottom: none; }
+
+    .pizza-item:hover { background: var(--cream); }
+
+    .pizza-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--dark);
+      white-space: nowrap;
+    }
+
+    .pizza-ingredients {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--brown);
+      letter-spacing: 0.02em;
+      flex: 1;
+      padding-left: 0.6rem;
+    }
+
+    .pizza-price {
+      font-family: 'Cormorant Garamond', serif;
       font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .menu-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-top: 1px solid var(--beige);
+    }
+
+    .menu-drinks {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .drink-item {
+      font-size: 0.85rem;
+      color: var(--brown);
+      font-weight: 300;
+    }
+
+    .drink-item strong {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--dark);
+      display: block;
+    }
+
+    .menu-notes {
+      text-align: right;
+      font-size: 0.8rem;
       font-weight: 300;
       color: var(--brown);
       line-height: 1.8;
-      margin-bottom: 2rem;
+    }
+
+    .menu-notes strong {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .menu-pizzas { grid-template-columns: 1fr; }
+      .pizza-item:nth-child(odd) { border-right: none; }
+      .pizza-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--beige); }
+      .pizza-item:last-child { border-bottom: none; }
+      .menu-footer { flex-direction: column; }
+      .menu-notes { text-align: left; }
     }
 
     /* ── AMBIANCE ── */
@@ -527,22 +615,110 @@
   <!-- MENU -->
   <section id="menu">
     <div class="section-inner">
-      <div class="menu-layout">
-        <img
-          src="https://scontent-mad2-1.xx.fbcdn.net/v/t39.30808-6/488224124_1217157853750830_6899205692229577137_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=7b2446&_nc_ohc=KY1ukJsqS28Q7kNvwEJzjmu&_nc_oc=Adpcopkx7l4HKlJ46FcwpRXVz9KUKY-SeiONhgjdH7YhBH4pDUpLLDjW4TEn_5xXwCNKglT5cvkZcVB3qEqsk1Be&_nc_zt=23&_nc_ht=scontent-mad2-1.xx&_nc_gid=wMtHT16Gz_VV52Ok1SVjYg&_nc_ss=7a389&oh=00_Af28fIaDJasyh0dbKS8cxsy7VewfboC3wEKw9QQrGX3NAw&oe=69E7C32F"
-          alt="Carte Saggio Pizza"
-          class="menu-image"
-        />
-        <div class="menu-text">
-          <p class="section-label">Notre carte</p>
-          <h2 class="section-title">Des pizzas<br><em>généreuses & savoureuses</em></h2>
-          <div class="divider"></div>
-          <p>
-            Chez Saggio Pizza, chaque pizza est préparée à la commande avec une pâte maison,
-            des produits frais sélectionnés avec soin et cuite au feu de bois pour cette
-            croûte dorée et croustillante qui fait toute la différence.
-          </p>
-          <a href="#planning" class="btn btn-dark">Voir où on est cette semaine</a>
+      <div class="menu-header">
+        <p class="section-label">Notre carte</p>
+        <h2 class="section-title">Des pizzas <em>au feu de bois</em></h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="menu-pizzas">
+        <div class="pizza-item">
+          <span class="pizza-name">Margarita</span>
+          <span class="pizza-ingredients">tomate, fromage</span>
+          <span class="pizza-price">9€</span>
+        </div>
+        <div class="pizza-item">
+          <span class="pizza-name">Vesuvio</span>
+          <span class="pizza-ingredients">tomate, jambon, fromage</span>
+          <span class="pizza-price">10€</span>
+        </div>
+        <div class="pizza-item">
+          <span class="pizza-name">Reine</span>
+          <span class="pizza-ingredients">tomate, jambon, champignons, fromage</span>
+          <span class="pizza-price">11€</span>
+        </div>
+        <div class="pizza-item">
+          <span class="pizza-name">Salami</span>
+          <span class="pizza-ingredients">tomate, salami, fromage</span>
+          <span class="pizza-price">12€</span>
+        </div>
+        <div class="pizza-item">
+          <span class="pizza-name">Végétarienne</span>
+          <span class="pizza-ingredients">tomate, champignons, poivrons, oignons, artichaut, fromage</span>
+          <span class="pizza-price">13€</span>
+        </div>
+        <div class="pizza-item">
+          <span class="pizza-name">Napolitaine</span>
+          <span class="pizza-ingredients">tomate, poivrons, anchois, câpres, fromage</span>
+          <span class="pizza-price">13€</span>
+        </div>
+        <div class="pizza-item">
+          <span class="pizza-name">Chorizo</span>
+          <span class="pizza-ingredients">tomate, poivrons, chorizo, fromage</span>
+          <span class="pizza-price">13€</span>
+        </div>
+        <div class="pizza-item">
+          <span class="pizza-name">Flamenkuche</span>
+          <span class="pizza-ingredients">crème, oignons, lardons, fromage</span>
+          <span class="pizza-price">13€</span>
+        </div>
+        <div class="pizza-item">
+          <span class="pizza-name">Chèvre Miel</span>
+          <span class="pizza-ingredients">tomate, chèvre, miel, fromage</span>
+          <span class="pizza-price">13€</span>
+        </div>
+        <div class="pizza-item">
+          <span class="pizza-name">4 Fromages</span>
+          <span class="pizza-ingredients">tomate, chèvre, gorgonzola, raclette, fromage</span>
+          <span class="pizza-price">14€</span>
+        </div>
+        <div class="pizza-item">
+          <span class="pizza-name">Savoyarde</span>
+          <span class="pizza-ingredients">tomate, lardons, oignons, reblochon, raclette, pdt, fromage</span>
+          <span class="pizza-price">14€</span>
+        </div>
+        <div class="pizza-item">
+          <span class="pizza-name">Paysanne</span>
+          <span class="pizza-ingredients">tomate, jambon, lardons, oignons, pomme de terre</span>
+          <span class="pizza-price">14€</span>
+        </div>
+        <div class="pizza-item">
+          <span class="pizza-name">Italienne</span>
+          <span class="pizza-ingredients">tomate, champignons, gorgonzola, pancetta, fromage</span>
+          <span class="pizza-price">14€</span>
+        </div>
+        <div class="pizza-item">
+          <span class="pizza-name">Carnivore</span>
+          <span class="pizza-ingredients">tomate, jambon, lardons, poulet, merguez, chorizo, fromage</span>
+          <span class="pizza-price">14€</span>
+        </div>
+        <div class="pizza-item">
+          <span class="pizza-name">Camembert</span>
+          <span class="pizza-ingredients">crème, camembert, champignons, lardons, fromage</span>
+          <span class="pizza-price">15€</span>
+        </div>
+        <div class="pizza-item">
+          <span class="pizza-name">Magret</span>
+          <span class="pizza-ingredients">tomate, jambon, lardons, magret, fromage</span>
+          <span class="pizza-price">15€</span>
+        </div>
+        <div class="pizza-item" style="grid-column: 1 / -1;">
+          <span class="pizza-name">Chef</span>
+          <span class="pizza-ingredients">selon son humeur</span>
+          <span class="pizza-price">16€</span>
+        </div>
+      </div>
+
+      <div class="menu-footer">
+        <div class="menu-drinks">
+          <div class="drink-item"><strong>Soda</strong>2€</div>
+          <div class="drink-item"><strong>Bière</strong>2,5€</div>
+          <div class="drink-item"><strong>Despé</strong>3,5€</div>
+          <div class="drink-item"><strong>Vin italien</strong>9€</div>
+        </div>
+        <div class="menu-notes">
+          <strong>Base crème : +1€</strong><br>
+          Calzone, Fruits de mer, Lasagnes maison<br>sur commande
         </div>
       </div>
     </div>
